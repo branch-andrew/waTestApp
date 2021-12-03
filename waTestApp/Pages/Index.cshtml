@@ -1,10 +1,26 @@
 ﻿@page
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnv
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Testing Title Setting";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Time is @System.DateTime.Now</a>.</p>
+    <p> ASPNETCORE_ENVIRONMENT = @hostingEnv.EnvironmentName</p>
+
+    <environment include="Development">
+    <div>The effective tag is: &lt;environment include=@hostingEnv.EnvironmentName&gt;</div>
+</environment>
+<environment exclude="Development">
+    <div>The effective tag is: &lt;environment exclude="@hostingEnv.EnvironmentName&gt;</div>
+</environment>
+<environment include="Staging,Development,Staging_2">
+    <div>
+        The effective tag is:
+        &lt;environment include="Staging,Development,Staging_2"&gt;
+    </div>
+</environment>
+
 </div>
